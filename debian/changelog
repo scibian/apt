@@ -1,3 +1,11 @@
+apt (1.4.7sci9u1) scibian9; urgency=medium
+
+  * apt.systemd.daily:
+    - do not update the update stamp in case of network errors
+    - call unattended-upgrades for repairing if apt-get check failed
+
+ -- Scibian Packaging Team <packaging@scibian.org>  Wed, 06 Sep 2017 18:06:18 +0200
+
 apt (1.4.7) stretch; urgency=medium
 
   * New release with important fixes up to 1.5~beta1; also see LP: #1702326
