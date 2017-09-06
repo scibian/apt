@@ -402,6 +402,25 @@ if [ $UpdateInterval -eq 0 ] &&
 fi
 
 if [ "$1" = "update" -o -z "$1" ] ; then
+    BAIL_OUT=0
+    # check if we can lock the cache and if the cache is clean
+    if which apt-get >/dev/null && ! eval apt-get check $XAPTOPT $XSTDERR ; then
+        debug_echo "error encountered in cron job with \"apt-get check\"."
+
+        if which unattended-upgrade >/dev/null; then
+        if ! eval unattended-upgrade --dry-run $XSTDOUT $XSTDERR ; then
+            debug_echo "error encountered in cron job with \"unattended-upgrade --dry-run\"."
+            BAIL_OUT=1
+        fi
+        else
+        BAIL_OUT=1
+        fi
+
+        if [ $BAIL_OUT -eq 1 ]; then
+        exit 0
+        fi
+    fi
+
     # deal with BackupArchiveInterval
     do_cache_backup $BackupArchiveInterval
 
