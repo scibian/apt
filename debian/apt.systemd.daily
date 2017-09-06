@@ -416,7 +416,7 @@ if [ "$1" = "update" -o -z "$1" ] ; then
     UPDATED=0
     UPDATE_STAMP=/var/lib/apt/periodic/update-stamp
     if check_stamp $UPDATE_STAMP $UpdateInterval; then
-	if eval apt-get $XAPTOPT -y update $XSTDERR; then
+	if out="$(apt-get -qq -y update 2>&1)" && test -z "$out"; then
 	    debug_echo "download updated metadata (success)."
 	    if which dbus-send >/dev/null 2>&1 && pidof dbus-daemon >/dev/null 2>&1; then
 		if dbus-send --system / app.apt.dbus.updated boolean:true ; then
