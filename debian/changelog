@@ -1,3 +1,9 @@
+apt (1.4.8sci9u1) scibian9; urgency=medium
+
+  * Debian update
+
+ -- Scibian Packaging Team <packaging@scibian.org>  Tue, 31 Oct 2017 17:43:23 +0100
+
 apt (1.4.8) stretch; urgency=medium
 
   [ Balint Reczey ]
